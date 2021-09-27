@@ -1,0 +1,105 @@
+#titulares
+{
+    overflow: scroll;
+    overflow-x: hidden;
+    margin: 8px 0 0 0!important; 
+    height: 460px; /* a-point */
+    /*height: 288px;*/ /* a-point */
+    position: relative;
+	width:280px;
+}
+#blogs {
+	overflow: hidden;
+	margin-bottom: 15px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	position: relative;
+	padding: 0 0 10px 20px;
+	width: 280px;
+}
+#blogs ul.listado
+{
+    width: 45%;
+    float: left;
+	overflow: hidden;
+}
+#blogs ul.listado li
+{
+    width: 110px;
+	padding: 5px;
+	float: left;
+}
+	#blogs ul.listado a {
+		font:normal 11px Arial, Verdana;
+		text-decoration: none;
+		color: #333;
+	}
+	#blogs ul.listado a:hover {
+		text-decoration: underline;
+	}
+
+#blogs .up
+{
+    position: absolute;
+    top: 8px;
+    right: 0;
+    width: 20px;
+    height: 16px;
+    background: url(buttons.png) no-repeat 0 0;
+}
+#blogs .up-click
+{
+    background: url(buttons.png) no-repeat 0 -16px;
+}
+#blogs .scroll
+{
+    position: absolute;
+    top: 24px;
+    right: 0;
+    width: 20px;
+    height: 428px; /* a-point - 32px */
+    background-image: url(scroll.jpg);
+}
+#blogs .scrolltip
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 170px;
+    background-image: url(scrolltip.jpg);
+}
+#blogs .scrolltiptop
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 8px;
+    background: url(buttons.png) no-repeat 0 -64px;    
+}
+#blogs .scrolltipbottom
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 20px;
+    height: 8px;
+    background: url(buttons.png) no-repeat 0 -72px;    
+}
+#blogs .scrolltip-click
+{
+}
+#blogs .down
+{
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    width: 20px;
+    height: 16px;
+    background: url(buttons.png) no-repeat 0 -32px;
+}
+#blogs .down-click
+{
+    background: url(buttons.png) no-repeat 0 -48px;
+}
+/* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: */

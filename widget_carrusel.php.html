@@ -1,0 +1,60 @@
+<base target="_top" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+body {
+
+    margin: 0;
+    padding: 0;
+}
+
+</style>
+
+
+
+<!-- CARRUSEL NUEVO JSON -->
+<link rel="stylesheet" type="text/css" href="https://gcdn.emol.cl/static/carrusel/css/carro_nuevo_guio.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="https://gcdn.emol.cl/static/carrusel/js/carro_guioteca.js"></script>
+
+<script type="text/javascript">
+
+  $(document).ready(function () {
+    
+    $.getJSON("json/carro_principal_27-09-2021_1642.json", function (d) {
+
+        var listsDiv = $(".multiple-items");
+
+        for (var i = 0; i < d.posts.length; i++) {
+	    var imagenCarro = d.posts[i].imagen_carro;
+		imagenCarro = imagenCarro.replace("www.guioteca.com","gcdn.emol.cl");
+		imagenCarro = imagenCarro.replace("http:","");
+            listsDiv.append("<div class='contenedor_notas_carro_guio'><span class='img_carro_guio'><a title='" + d.posts[i].titulo + "' href='https://www.guioteca.com/carrusel/&quot;+&#32;d.posts[i].url.replace('http:','') +"'> <img alt='" + d.posts[i].titulo + "' src='https://www.guioteca.com/carrusel/&quot;&#32;+&#32;imagenCarro&#32;+&#32;&quot;' width='124' height='79'/> <span class='txt_carro_guio'>" + d.posts[i].titulo + "</span></a></span></div>");
+        };
+
+        if (i != -1) {
+          $('.multiple-items').slick({
+                  dots: false,
+                  infinite: true,
+                  speed: 300,
+                  slidesToShow: 6,
+                  touchMove: false,
+                  slidesToScroll: 1
+            });
+        }
+
+    });
+
+  });
+
+</script>
+
+<!-- CARRUSEL -->
+    <section id="features">
+        <div class="content">
+            <div class="slider multiple-items"></div>
+        </div>
+    </section>
+<!-- FIN CARRUSEL -->
+
+

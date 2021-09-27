@@ -1,0 +1,117 @@
+
+jQuery(document).ready(function() {
+    $j = jQuery;
+    
+    var pixperclick = 10;
+    $j('#titulares').css('overflow', 'hidden');
+
+    // arrow up ---------------------------------------------------------------
+    var up = $j('<div class="up"></div>');
+    up.get(0).__pressed = false;
+    up.mousedown(function()
+    {
+        this.__pressed = true;
+        $j(this).addClass('up-click');
+        go_up();
+        return false;
+    });
+    function go_up()
+    {
+        if ($j("#blogs .up").get(0).__pressed)
+        {
+            setTimeout(function()
+            {
+                var min = 0;
+                var n = (parseInt($j("#blogs .scrolltip").css('top'), 10) - pixperclick);
+                n = (n > min) ? n : min;
+                $j("#blogs .scrolltip").css('top', n + 'px');
+                $j('#titulares').get(0).scrollTop -= (pixperclick * ratio);
+                go_up()
+            }, 50);
+        }
+    }
+    up.mouseup(function()
+    {
+        this.__pressed = false;
+        $j(this).removeClass('up-click');
+    });
+    // arrow down -------------------------------------------------------------
+    var dw = $j('<div class="down"></div>');
+    dw.get(0).__pressed = false;
+    dw.mousedown(function()
+    {
+        this.__pressed = true;
+        $j(this).addClass('down-click');
+        go_down();
+        return false;
+    });
+    function go_down()
+    {
+        if ($j("#blogs .down").get(0).__pressed)
+        {
+            var max = 255;
+            var max = ($j("#blogs .scroll").get(0).offsetHeight - $j("#blogs .scrolltip").get(0).offsetHeight);
+            var n = (parseInt($j("#blogs .scrolltip").css('top'), 10) + pixperclick);
+            n = (n < max) ? n : max;
+            $j("#blogs .scrolltip").css('top', n + 'px');
+            $j('#titulares').get(0).scrollTop += (pixperclick * ratio);
+            setTimeout(function()
+            {
+                go_down()
+            }, 50);
+        }
+    }
+    dw.mouseup(function()
+    {
+        this.__pressed = false;
+        $j(this).removeClass('down-click');
+    });
+    var scr = $j('<div class="scroll"></div>');
+    var sct = $j('<div class="scrolltip"></div>');
+    sct.append($j('<div class="scrolltiptop"></div>'));
+    sct.append($j('<div class="scrolltipbottom"></div>'));
+
+    $j('#blogs').append(up);
+    $j('#blogs').append(dw);
+    $j('#blogs').append(scr);
+    $j(scr).append(sct);
+
+    if($j('#titulares ul').length > 0) {
+        var scrollbar_height = parseInt($j("#blogs .scroll").css('height'), 10);
+        var viewport_absolute_height = $j('#titulares ul').get(0).offsetHeight;
+        var viewport_relative_height = parseInt($j('#titulares').css('height'), 10);
+    }
+
+    var scrolltip_height = ((scrollbar_height - 10) / viewport_absolute_height * viewport_relative_height);
+    if (scrolltip_height >= scrollbar_height)
+    {
+        scrolltip_height = 0;
+        $j("#blogs .scrolltip .scrolltiptop").css('height', 0);
+        $j("#blogs .scrolltip .scrolltipbottom").css('height', 0);
+    }
+    var ratio = (viewport_absolute_height / scrollbar_height);
+    $j("#blogs .scrolltip").css('height', scrolltip_height + 'px');
+    $j("#blogs .scrolltip").draggable(
+    {
+        drag: function()
+        {
+            var index = parseInt($j(this).css('top'), 10) * ratio;
+            $j('#titulares').get(0).scrollTop = Math.round(index);
+        },
+        axis: 'y',
+        containment: 'parent'
+    });
+
+    // random position scrollbar
+    var bs = scrollbar_height - parseInt($j("#blogs .scrolltip").css('height'), 10); // bar-scroll
+
+  if($j('#titulares').length > 0) {
+    var ps = $j('#titulares ul').get(0).offsetHeight - $j('#titulares').get(0).offsetHeight; // pan-scroll
+
+    var pos = (Math.floor(Math.random() * 3) / 2);
+    $j('#titulares').get(0).scrollTop = Math.round(ps * pos);
+    $j("#blogs .scrolltip").css('top', Math.round(bs * pos) + 'px');
+  }
+});		
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: */
